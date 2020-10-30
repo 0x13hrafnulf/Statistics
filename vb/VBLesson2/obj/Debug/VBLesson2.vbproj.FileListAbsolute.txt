@@ -1,0 +1,12 @@
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\bin\Debug\VBLesson2.exe.config
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\bin\Debug\VBLesson2.exe
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\bin\Debug\VBLesson2.pdb
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\bin\Debug\VBLesson2.xml
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.vbprojAssemblyReference.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.Form1.resources
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.Resources.resources
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.vbproj.GenerateResource.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.vbproj.CoreCompileInputs.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.exe
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.xml
+D:\Hrafnulf\Sapienza\Statistics\Labs\vb\VBLesson2\obj\Debug\VBLesson2.pdb
