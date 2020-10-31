@@ -1,4 +1,4 @@
-﻿namespace Lesson3
+﻿namespace Lesson4
 {
     partial class Form1
     {
@@ -31,7 +31,6 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -60,6 +59,7 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,7 +76,7 @@
             this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(12, 73);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(379, 286);
+            this.treeView1.Size = new System.Drawing.Size(261, 286);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -104,20 +104,6 @@
             this.button1.Text = "Open File";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.AutoArrange = false;
-            this.listView1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(273, 73);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(711, 286);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // richTextBox3
             // 
@@ -258,12 +244,6 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Integer",
-            "Double",
-            "String",
-            "Boolean",
-            "DateTime"});
             this.comboBox1.Location = new System.Drawing.Point(9, 160);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(144, 22);
@@ -429,6 +409,20 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Plot";
             // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.AutoArrange = false;
+            this.listView1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(273, 73);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(711, 286);
+            this.listView1.TabIndex = 3;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,7 +460,6 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -495,6 +488,7 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

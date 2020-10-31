@@ -12,13 +12,14 @@ using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.FileIO;
 using System.Drawing.Drawing2D;
 
-namespace Lesson3
+namespace Lesson4
 {
     public partial class Form1 : Form
     {
         string file;
         string filename;
         List<Variable> Data;
+        List<Type> types = new List<Type> { typeof(Int32), typeof(Double), typeof(String), typeof(Boolean), typeof(DateTime) };
 
         public Form1()
         {
@@ -39,6 +40,11 @@ namespace Lesson3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            foreach (Type t in types)
+            {
+                this.comboBox1.Items.Add(t.ToString());
+            }
+            
 
         }
 
@@ -143,8 +149,9 @@ namespace Lesson3
         }
         private void print_Listview()
         {
+            int padding = 30;
             int list_width = listView1.Width;
-            int column_width = list_width / Data.Count;
+            int column_width = padding + list_width / Data.Count;
             int number_of_rows = Data[0].values.Count;
             int number_of_columns = Data.Count;
             listView1.BeginUpdate();
@@ -181,7 +188,7 @@ namespace Lesson3
         {
             TreeNode file_node = new TreeNode(filename);
             treeView1.Nodes.Add(file_node);
-
+            
             int number_of_rows = Data[0].values.Count;
             int number_of_columns = Data.Count;
             
@@ -190,13 +197,15 @@ namespace Lesson3
             {
                 TreeNode v = new TreeNode(Data[i].m_name);
                 treeView1.Nodes[0].Nodes.Add(v);
+
                 for (int j = 0; j < number_of_rows; ++j)
                 {
                     TreeNode node = new TreeNode(Data[i].get_string_value(j));
                     treeView1.Nodes[0].Nodes[i].Nodes.Add(node);
                 }
             }
-            treeView1.EndUpdate();
+            treeView1.Nodes[0].Expand();
+            treeView1.EndUpdate();     
         }
         private void update_Treeview(int index)
         {
@@ -206,6 +215,7 @@ namespace Lesson3
             {
                 treeView1.Nodes[0].Nodes[index].Nodes[i].Text = Data[index].get_string_value(i);
             }
+            treeView1.Nodes[0].Expand();
             treeView1.EndUpdate();
         }
 
@@ -239,7 +249,7 @@ namespace Lesson3
 
             
         }
-        private void set_types(int index, Variable_Type type)
+        private void set_types(int index, Type type)
         {
             Data[index].set_type(type);
         }
@@ -250,6 +260,7 @@ namespace Lesson3
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode selected_item = treeView1.SelectedNode;
+
             if (selected_item != null && selected_item.Text != filename && selected_item.Level == 1)
             {
                 int index = selected_item.Index;
@@ -258,8 +269,7 @@ namespace Lesson3
                 textBox2.Text = Data[index].get_default_type().ToString();
                 textBox3.Text = Data[index].get_type().ToString();
 
-                comboBox1.SelectedIndex = (int)(Data[index].get_default_type());
-
+               
             }
 
         }
@@ -270,12 +280,13 @@ namespace Lesson3
             if (selected_item != null && selected_item.Text != filename && selected_item.Level == 1)
             {
                 int index = selected_item.Index;
-                if (comboBox1.SelectedIndex != (int)(Data[index].get_type()))
-                {
+                Type type = types[comboBox1.SelectedIndex];
 
+                if (type != Data[index].get_type())
+                {
                     try
                     {
-                        set_types(index, (Variable_Type)comboBox1.SelectedIndex);
+                        set_types(index, type);
                     }
                     catch (Exception exception)
                     {
@@ -315,6 +326,7 @@ namespace Lesson3
         private void button5_Click(object sender, EventArgs e)
         {
             Plot m_plot = new Plot();
+            m_plot.load_values(Data[1], Data[2]);
             m_plot.Show();
         }
     }

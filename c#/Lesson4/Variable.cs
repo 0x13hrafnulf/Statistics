@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lesson3
+namespace Lesson4
 {
 
     enum Variable_Type
@@ -17,14 +17,22 @@ namespace Lesson3
         DateTime
 
     }
-    class Variable
+    public class Variable
     {
         public string m_name;
-        Variable_Type m_type;
-        Variable_Type m_default_type;
+        Type m_type;
+        Type m_default_type;
         public bool update = false;
 
         public List<Value> values; 
+
+        public dynamic m_min_value;
+        public dynamic m_max_value;
+        public dynamic m_range;
+        public dynamic m_mean;
+        public int m_count;
+
+
 
         public Variable(string name)
         {
@@ -55,11 +63,11 @@ namespace Lesson3
             }
 
         }
-        public Variable_Type get_type()
+        public Type get_type()
         {
             return m_type;
         }
-        public void set_default_type(Variable_Type type)
+        public void set_default_type(Type type)
         {
             m_default_type = type;
             m_type = type;
@@ -69,7 +77,7 @@ namespace Lesson3
                 val.set_default_type(type);
             }
         }
-        public Variable_Type get_default_type()
+        public Type get_default_type()
         {
             return m_default_type;
         }
@@ -92,40 +100,40 @@ namespace Lesson3
 
 
             if (bool.TryParse(values[0].m_value, out bool_value))
-                set_default_type(Variable_Type.Boolean);
+                set_default_type(typeof(Boolean));
             else if (Int32.TryParse(values[0].m_value, out int_value))
             {
                 bool check_double = false;
                 foreach (Value val in values)
                 {
-                    check_double = val.check_type() == Variable_Type.Double;
+                    check_double = val.check_type() == typeof(Double);
                     if (check_double) break;
                 }
-                if(check_double) set_default_type(Variable_Type.Double);
-                else set_default_type(Variable_Type.Integer);
+                if(check_double) set_default_type(typeof(Double));
+                else set_default_type(typeof(Int32));
             }           
             else if (double.TryParse(values[0].m_value, out double_value))
-                set_default_type(Variable_Type.Double);
+                set_default_type(typeof(Double));
             else if (DateTime.TryParse(values[0].m_value, out date_value))
-                set_default_type(Variable_Type.DateTime);
+                set_default_type(typeof(DateTime));
             else
             {
                 bool check_double = false;
                 bool check_int = false;
                 foreach (Value val in values)
                 {
-                    check_double = val.check_type() == Variable_Type.Double;
-                    check_int = val.check_type() == Variable_Type.Integer;
+                    check_double = val.check_type() == typeof(Double);
+                    check_int = val.check_type() == typeof(Int32);
                     if (check_double) break;
                 }
-                if (check_double) set_default_type(Variable_Type.Double);
-                else if(check_int) set_default_type(Variable_Type.Integer);
-                else set_default_type(Variable_Type.String);
+                if (check_double) set_default_type(typeof(Double));
+                else if(check_int) set_default_type(typeof(Int32));
+                else set_default_type(typeof(String));
             }
                
 
         }
-        public void set_type(Variable_Type type)
+        public void set_type(Type type)
         {
             m_type = type;
             update_values();

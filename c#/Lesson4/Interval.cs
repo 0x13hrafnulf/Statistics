@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lesson2
+namespace Lesson4
 {
-    abstract class Interval
+    public abstract class Interval
     {
 
 
 
     }
-    class IntegerInterval : Interval
+    public class IntegerInterval : Interval
     {
         public int m_size;
         public int m_starting_point;
@@ -28,7 +28,7 @@ namespace Lesson2
             m_count = 0;
         }
     }
-    class DecimalInterval : Interval
+    public class DecimalInterval : Interval
     {
         public double m_size;
         public double m_starting_point;
