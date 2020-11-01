@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.FileIO;
-using System.Drawing.Drawing2D;
+
 
 namespace Lesson4
 {
@@ -136,7 +136,6 @@ namespace Lesson4
 
                 do
                 {
-
                     for (int i = 0; i < number_of_columns; ++i)
                     {
                         Data[i].Add(fields[i]);
@@ -152,7 +151,7 @@ namespace Lesson4
             int padding = 30;
             int list_width = listView1.Width;
             int column_width = padding + list_width / Data.Count;
-            int number_of_rows = Data[0].values.Count;
+            int number_of_rows = Data[0].m_values.Count;
             int number_of_columns = Data.Count;
             listView1.BeginUpdate();
             for (int i = 0; i < number_of_columns; ++i)
@@ -173,7 +172,7 @@ namespace Lesson4
         }
         private void update_Listview(int index)
         {
-            int number_of_rows = Data[0].values.Count;
+            int number_of_rows = Data[0].m_values.Count;
             listView1.BeginUpdate();
             for (int i = 0; i < number_of_rows; ++i)
             {
@@ -189,7 +188,7 @@ namespace Lesson4
             TreeNode file_node = new TreeNode(filename);
             treeView1.Nodes.Add(file_node);
             
-            int number_of_rows = Data[0].values.Count;
+            int number_of_rows = Data[0].m_values.Count;
             int number_of_columns = Data.Count;
             
             treeView1.BeginUpdate();
@@ -209,7 +208,7 @@ namespace Lesson4
         }
         private void update_Treeview(int index)
         {
-            int number_of_rows = Data[0].values.Count;
+            int number_of_rows = Data[0].m_values.Count;
             treeView1.BeginUpdate();
             for (int i = 0; i < number_of_rows; ++i)
             {

@@ -24,40 +24,34 @@ namespace Lesson4
         Type m_default_type;
         public bool update = false;
 
-        public List<Value> values; 
-
-        public dynamic m_min_value;
-        public dynamic m_max_value;
-        public dynamic m_range;
-        public dynamic m_mean;
-        public int m_count;
+        public List<Value> m_values; 
 
 
 
         public Variable(string name)
         {
             m_name = name;
-            values = new List<Value>();
+            m_values = new List<Value>();
         }
         public void Add(string value)
         {
             Value val = new Value(value);
-            values.Add(val);       
+            m_values.Add(val);       
         }
         public dynamic get(int i)
         {
-            return values[i].get_value();
+            return m_values[i].get_value();
         }
         public string get_string_value(int i)
         {
-            if (values[i].m_value == null) return "";
+            if (m_values[i].m_value == null) return "";
             
-            return values[i].m_value.ToString();
+            return m_values[i].m_value.ToString();
         }
 
         public void update_values()
         {        
-            foreach (Value val in values)
+            foreach (Value val in m_values)
             {
                 val.set_type(m_type);
             }
@@ -72,7 +66,7 @@ namespace Lesson4
             m_default_type = type;
             m_type = type;
 
-            foreach (Value val in values)
+            foreach (Value val in m_values)
             {
                 val.set_default_type(type);
             }
@@ -99,12 +93,12 @@ namespace Lesson4
             DateTime date_value;
 
 
-            if (bool.TryParse(values[0].m_value, out bool_value))
+            if (bool.TryParse(m_values[0].m_value, out bool_value))
                 set_default_type(typeof(Boolean));
-            else if (Int32.TryParse(values[0].m_value, out int_value))
+            else if (Int32.TryParse(m_values[0].m_value, out int_value))
             {
                 bool check_double = false;
-                foreach (Value val in values)
+                foreach (Value val in m_values)
                 {
                     check_double = val.check_type() == typeof(Double);
                     if (check_double) break;
@@ -112,15 +106,15 @@ namespace Lesson4
                 if(check_double) set_default_type(typeof(Double));
                 else set_default_type(typeof(Int32));
             }           
-            else if (double.TryParse(values[0].m_value, out double_value))
+            else if (double.TryParse(m_values[0].m_value, out double_value))
                 set_default_type(typeof(Double));
-            else if (DateTime.TryParse(values[0].m_value, out date_value))
+            else if (DateTime.TryParse(m_values[0].m_value, out date_value))
                 set_default_type(typeof(DateTime));
             else
             {
                 bool check_double = false;
                 bool check_int = false;
-                foreach (Value val in values)
+                foreach (Value val in m_values)
                 {
                     check_double = val.check_type() == typeof(Double);
                     check_int = val.check_type() == typeof(Int32);
@@ -141,7 +135,7 @@ namespace Lesson4
         public void restore_type()
         {
             m_type = m_default_type;
-            foreach (Value val in values)
+            foreach (Value val in m_values)
             {
                 val.restore_value();
             }
