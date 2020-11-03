@@ -294,8 +294,8 @@ namespace Lesson4
             G.DrawRectangle(blackPen, m_rectangle);
 
             G.DrawRectangle(blackPen, m_table);
-            int m_grid_x = dt.m_x_intervals.m_count + 1;
-            int m_grid_y= dt.m_y_intervals.m_count + 1;
+            int m_grid_x = dt.m_y_intervals.m_count + 1;
+            int m_grid_y= dt.m_x_intervals.m_count + 1;
 
             int grid_w = m_table.Width / (m_grid_x + 1);
             int grid_h = m_table.Height / (m_grid_y + 1);
@@ -325,9 +325,9 @@ namespace Lesson4
             G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2 + grid_w * m_grid_x, m_table.Y + m_pad / 2);
 
 
-            for (int i = 0; i <= dt.m_y_intervals.m_count; ++i)
+            for (int i = 0; i <= dt.m_x_intervals.m_count; ++i)
             {
-                for (int j = 0; j <= dt.m_x_intervals.m_count; ++j)
+                for (int j = 0; j <= dt.m_y_intervals.m_count; ++j)
                 {
                     G.DrawString(dt.m_distribution.m_frequency[i,j].ToString(), font, fontBrush, m_table.X + m_pad / 2 + grid_w * (j+1), m_table.Y + m_pad / 2 + grid_h * (i+1));
                 }

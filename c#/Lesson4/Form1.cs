@@ -74,15 +74,17 @@ namespace Lesson4
             catch (Exception exception)
             {
                 richTextBox3.Text = "> Error!!!" + Environment.NewLine;
-                richTextBox3.AppendText("> Message: " + exception.Message + Environment.NewLine);
                 richTextBox3.AppendText("> Occured during reading the file! " + Environment.NewLine);
                 richTextBox3.AppendText("> Possible causes: " + Environment.NewLine);
                 richTextBox3.AppendText(">  1) There might be a header (converting string to other data type (int, double etc.)." + Environment.NewLine);
                 richTextBox3.AppendText(">      1.1) Please uncheck 'No header' and try opening file again. Skipping this step might cause crash of the application!" + Environment.NewLine);
                 richTextBox3.AppendText(">  2) Invalid data types." + Environment.NewLine);
+                richTextBox3.AppendText("> Message: " + exception.Message + Environment.NewLine);
             }
             print_Listview();
             print_Treeview();
+
+
         }
         private void open_CSV_file(string path)
         {
@@ -157,6 +159,8 @@ namespace Lesson4
             for (int i = 0; i < number_of_columns; ++i)
             {
                 listView1.Columns.Add(Data[i].m_name, column_width);
+                comboBox2.Items.Add(Data[i].m_name);
+                comboBox3.Items.Add(Data[i].m_name);
             }
 
             for (int i = 0; i < number_of_rows; ++i)
@@ -323,10 +327,25 @@ namespace Lesson4
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {
-            Plot m_plot = new Plot();
-            m_plot.load_values(Data[1], Data[2]);
-            m_plot.Show();
+        {             
+            try
+            {
+                int first_index = comboBox2.SelectedIndex;
+                int second_index = comboBox3.SelectedIndex;
+                Plot m_plot = new Plot();
+                m_plot.load_values(Data[first_index], Data[second_index]);
+                m_plot.Show();
+            }
+            catch (Exception exception)
+            {
+                richTextBox3.Text = "> Error!!!" + Environment.NewLine;
+                richTextBox3.AppendText("> Occured during invoking drawing! " + Environment.NewLine);
+                richTextBox3.AppendText("> Cannot invoke drawing process!" + Environment.NewLine);
+                richTextBox3.AppendText("> Possible causes: " + Environment.NewLine);
+                richTextBox3.AppendText(">  1) Select variables to draw;" + Environment.NewLine);
+                richTextBox3.AppendText(">  2) Variables selected are non-numeric." + Environment.NewLine);
+                richTextBox3.AppendText("> Message: " + exception.Message + Environment.NewLine);
+            }
         }
     }
 }

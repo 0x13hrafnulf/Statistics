@@ -97,7 +97,7 @@
             this.textBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.textBox2.Size = new System.Drawing.Size(47, 22);
             this.textBox2.TabIndex = 4;
-            this.textBox2.Text = "5";
+            this.textBox2.Text = "6";
             // 
             // label2
             // 

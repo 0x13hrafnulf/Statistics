@@ -131,9 +131,9 @@ namespace Lesson4
 
             }
 
-            for (int i = 0, sum = 0, j = 0; i < m_y_intervals.m_count;)
+            for (int i = 0, sum = 0, j = 0; i < m_x_intervals.m_count + 1;)
             {
-                if (j < m_x_intervals.m_count)
+                if (j < m_y_intervals.m_count)
                 {
                     sum += m_frequency[i, j];
                     ++j;
@@ -146,19 +146,20 @@ namespace Lesson4
                     ++i;
                 }              
             }
-            for (int i = 0, sum = 0, j = 0; i < m_x_intervals.m_count + 1;)
+
+            for (int i = 0, sum = 0, j = 0; j < m_y_intervals.m_count + 1;)
             {
-                if (j < m_y_intervals.m_count)
+                if (i < m_x_intervals.m_count)
                 {
-                    sum += m_frequency[j, i];
-                    ++j;
+                    sum += m_frequency[i, j];
+                    ++i;
                 }
                 else
                 {
-                    m_frequency[j, i] = sum;
-                    j = 0;
+                    m_frequency[i, j] = sum;
+                    i = 0;
                     sum = 0;
-                    ++i;
+                    ++j;
                 }
             }
 
