@@ -77,7 +77,10 @@ namespace Lesson4
             histo2 = new Histogram(0, 3 * pictureBox1.Height / 4, pictureBox1.Width / 2, pictureBox1.Height / 4 - 2);
             scatter = new ScatterPlot(pictureBox1.Width / 2, 0, pictureBox1.Width / 2, pictureBox1.Height - 3);
 
-
+            viewports.Add(table);
+            viewports.Add(histo1);
+            viewports.Add(histo2);
+            viewports.Add(scatter);
         }
         private void draw_scene()
         {
@@ -98,6 +101,7 @@ namespace Lesson4
             x_intervals = Convert.ToInt32(textBox1.Text);
             y_intervals = Convert.ToInt32(textBox2.Text);
             Data.recalculate_intervals(x_intervals, y_intervals);
+            draw_scene();
         }
 
         private void button2_Click(object sender, EventArgs e)

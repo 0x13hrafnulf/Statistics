@@ -105,7 +105,7 @@ namespace Lesson4
             Pen blackPen = new Pen(Color.Black, 1);
             Brush blueBrush = new SolidBrush(Color.BlueViolet);
             Brush fontBrush = new SolidBrush(Color.Black);
-            Pen redPean = new Pen(Color.Red, 2);
+            Pen redPen = new Pen(Color.Red, 2);
 
             float font_size = 9;
             Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
@@ -121,19 +121,28 @@ namespace Lesson4
 
             //BARS
 
+            int n_bars = interval.m_count;
+            int max_height = Math.Abs(m_vertical_axis.m_A.Y - m_vertical_axis.m_B.Y);
+            int width = Math.Abs(m_horizontal_axis.m_A.X - m_horizontal_axis.m_B.X) / n_bars;
+            
+            for (int i = 0; i < n_bars; ++i)
+            {
+                float height = interval.m_intervals[i].m_density * max_height / interval.m_max_density;
 
+                int x = m_vertical_axis.m_A.X + width * i;
+                int y = m_vertical_axis.m_A.Y + (max_height - (int)height); 
+                G.FillRectangle(blueBrush, new Rectangle(x , y, width, (int)height));
 
+                double x_mean = (interval.m_intervals[i].m_mean - (double)interval.m_intervals[i].m_starting_point) * width / interval.m_intervals[i].m_size  ;
 
-
-
-
-
+                G.DrawLine(redPen, (float)(x + x_mean), m_vertical_axis.m_A.Y, (float)(x + x_mean), m_vertical_axis.m_B.Y);
+            }
 
 
 
             blackPen.Dispose();
             blueBrush.Dispose();
-            redPean.Dispose();
+            redPen.Dispose();
             fontBrush.Dispose();
         }
         public override void update(int dx, int dy)
@@ -182,7 +191,7 @@ namespace Lesson4
             Pen blackPen = new Pen(Color.Black, 1);
             Brush blueBrush = new SolidBrush(Color.Blue);
             Brush fontBrush = new SolidBrush(Color.Black);
-            Pen redPean = new Pen(Color.Red, 2);
+            Pen redPen = new Pen(Color.Red, 2);
 
             float font_size = 9;
             Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
@@ -228,13 +237,13 @@ namespace Lesson4
             double y_mean = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * (dt.m_y_mean) / dt.m_y_max_value;
             Line mean_y = new Line(new Point(m_horizontal_axis.m_A.X, (int)y_mean), new Point(m_horizontal_axis.m_B.X, (int)y_mean));
 
-            G.DrawLine(redPean, mean_x.m_A, mean_x.m_B);
-            G.DrawLine(redPean, mean_y.m_A, mean_y.m_B);
+            G.DrawLine(redPen, mean_x.m_A, mean_x.m_B);
+            G.DrawLine(redPen, mean_y.m_A, mean_y.m_B);
 
 
             blackPen.Dispose();
             blueBrush.Dispose();
-            redPean.Dispose();
+            redPen.Dispose();
             fontBrush.Dispose();
         }
         public override void update(int dx, int dy)
@@ -316,6 +325,13 @@ namespace Lesson4
             G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2 + grid_w * m_grid_x, m_table.Y + m_pad / 2);
 
 
+            for (int i = 0; i <= dt.m_y_intervals.m_count; ++i)
+            {
+                for (int j = 0; j <= dt.m_x_intervals.m_count; ++j)
+                {
+                    G.DrawString(dt.m_distribution.m_frequency[i,j].ToString(), font, fontBrush, m_table.X + m_pad / 2 + grid_w * (j+1), m_table.Y + m_pad / 2 + grid_h * (i+1));
+                }
+            }
 
 
             fontBrush.Dispose();

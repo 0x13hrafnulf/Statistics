@@ -27,6 +27,7 @@ namespace Lesson4
         public List<Datapoint> m_points = new List<Datapoint>();
         public IntervalList m_x_intervals;
         public IntervalList m_y_intervals;
+        public bivariate_distribution m_distribution;
 
         public Dataset(Variable first, Variable second)
         {
@@ -75,18 +76,27 @@ namespace Lesson4
 
             for (int i = 0; i < m_count; ++i)
             {
-                m_x_intervals.check_intervals((int)m_points[i].m_x);
-                m_y_intervals.check_intervals((int)m_points[i].m_y);
+                m_x_intervals.check_intervals(m_points[i].m_x);
+                m_y_intervals.check_intervals(m_points[i].m_y);
             }
             m_x_intervals.find_densities();
             m_y_intervals.find_densities();
+            m_distribution = new bivariate_distribution(m_x_intervals, m_y_intervals);
+            m_distribution.compute_frequencies(m_points);
         }
         public void recalculate_intervals(int x_intervals, int y_intervals)
         {
             m_x_intervals.repopulate(x_intervals, m_x_min_value, m_x_max_value);
             m_y_intervals.repopulate(y_intervals, m_y_min_value, m_y_max_value);
+            for (int i = 0; i < m_count; ++i)
+            {
+                m_x_intervals.check_intervals(m_points[i].m_x);
+                m_y_intervals.check_intervals(m_points[i].m_y);
+            }
             m_x_intervals.find_densities();
             m_y_intervals.find_densities();
+            m_distribution = new bivariate_distribution(m_x_intervals, m_y_intervals);
+            m_distribution.compute_frequencies(m_points);
 
         }
         public void transform(Viewport chart)

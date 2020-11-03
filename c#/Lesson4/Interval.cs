@@ -14,7 +14,7 @@ namespace Lesson4
         public int m_ending_point;
         public double m_mean;
         public int m_count;
-        public int m_density;
+        public float m_density;
 
         public Interval(int start, int size)
         {
@@ -38,7 +38,7 @@ namespace Lesson4
         public int m_count;
         public string m_name;
         public List<Interval> m_intervals;
-        public int m_max_density;
+        public float m_max_density;
 
         public IntervalList(int count, string name)
         {
@@ -66,9 +66,9 @@ namespace Lesson4
             populate(min, max);
         }
 
-        public void check_intervals(int value)
+        public void check_intervals(double value)
         {
-            int index = (value - m_intervals[0].m_starting_point) / m_intervals[0].m_size;
+            int index = ((int)value - m_intervals[0].m_starting_point) / m_intervals[0].m_size;
             if (index == m_count) index = m_count - 1;
             m_intervals[index].m_count += 1;
             m_intervals[index].update_mean(value);
@@ -88,7 +88,7 @@ namespace Lesson4
             
             foreach (Interval i in m_intervals)
             {
-                i.m_density = i.m_count / i.m_size;
+                i.m_density = (float)i.m_count / (float)i.m_size;
             }
 
             m_max_density = m_intervals[0].m_density;
@@ -98,6 +98,73 @@ namespace Lesson4
                 m_max_density = m_max_density > m_intervals[i].m_density ? m_max_density : m_intervals[i].m_density;
             }
         }
+    }
+
+    public class bivariate_distribution
+    {
+        public int[,] m_frequency;
+        public double[,] m_relative_frequency;
+
+        public IntervalList m_x_intervals;
+        public IntervalList m_y_intervals;
+
+        public bivariate_distribution(IntervalList x_interval, IntervalList y_interval)
+        {
+            m_x_intervals = x_interval;
+            m_y_intervals = y_interval;
+
+            m_frequency = new int[m_x_intervals.m_count + 1, m_y_intervals.m_count + 1];
+            m_relative_frequency = new double[m_x_intervals.m_count + 1, m_y_intervals.m_count + 1];
+        }
+
+        public void compute_frequencies(List<Datapoint> points)
+        {
+            
+            foreach (Datapoint d in points)
+            {
+                int i = ((int)d.m_x - m_x_intervals.m_intervals[0].m_starting_point) / m_x_intervals.m_intervals[0].m_size;
+                int j = ((int)d.m_y - m_y_intervals.m_intervals[0].m_starting_point) / m_y_intervals.m_intervals[0].m_size;
+                if (i == m_x_intervals.m_count) i = m_x_intervals.m_count - 1;
+                if (j == m_y_intervals.m_count) j = m_y_intervals.m_count - 1;
+
+                m_frequency[i, j] += 1;
+
+            }
+
+            for (int i = 0, sum = 0, j = 0; i < m_y_intervals.m_count;)
+            {
+                if (j < m_x_intervals.m_count)
+                {
+                    sum += m_frequency[i, j];
+                    ++j;
+                }
+                else
+                {
+                    m_frequency[i, j] = sum;
+                    j = 0;
+                    sum = 0;
+                    ++i;
+                }              
+            }
+            for (int i = 0, sum = 0, j = 0; i < m_x_intervals.m_count + 1;)
+            {
+                if (j < m_y_intervals.m_count)
+                {
+                    sum += m_frequency[j, i];
+                    ++j;
+                }
+                else
+                {
+                    m_frequency[j, i] = sum;
+                    j = 0;
+                    sum = 0;
+                    ++i;
+                }
+            }
+
+
+        }
+
     }
        
 }
