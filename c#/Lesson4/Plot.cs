@@ -98,10 +98,24 @@ namespace Lesson4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            x_intervals = Convert.ToInt32(textBox1.Text);
-            y_intervals = Convert.ToInt32(textBox2.Text);
-            Data.recalculate_intervals(x_intervals, y_intervals);
-            draw_scene();
+            try
+            {
+                x_intervals = Convert.ToInt32(textBox1.Text);
+                y_intervals = Convert.ToInt32(textBox2.Text);
+                Data.recalculate_intervals(x_intervals, y_intervals);
+                draw_scene();
+            }
+            catch (Exception exception)
+            {
+                richTextBox1.Text = "> Error!!!" + Environment.NewLine;
+                richTextBox1.AppendText("> Occured during invoking redrawing! " + Environment.NewLine);
+                richTextBox1.AppendText("> Cannot invoke redrawing process!" + Environment.NewLine);
+                richTextBox1.AppendText("> Possible causes: " + Environment.NewLine);
+                richTextBox1.AppendText(">  1) Incorrect data type of number of intervals, it should be Integer;" + Environment.NewLine);
+                richTextBox1.AppendText(">  2) Number of intervals is too big(small) to compute distributions;" + Environment.NewLine);
+                richTextBox1.AppendText(">  3) Unexpected behaviour " + Environment.NewLine);
+                richTextBox1.AppendText("> Message: " + exception.Message + Environment.NewLine);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
