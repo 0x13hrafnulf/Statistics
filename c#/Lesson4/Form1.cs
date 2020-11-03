@@ -92,6 +92,8 @@ namespace Lesson4
             listView1.Clear();
             Data.Clear();
             richTextBox3.Clear();
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
             using (TextFieldParser csvReader = new TextFieldParser(path)) //TextFieldParser(path,System.Text.Encoding.Default)
             {
                 

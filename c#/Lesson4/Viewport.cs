@@ -195,7 +195,6 @@ namespace Lesson4
 
             float font_size = 9;
             Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
-
             G.DrawRectangle(blackPen, m_rectangle);
 
             //GRID
@@ -224,11 +223,18 @@ namespace Lesson4
             float point_w = 6;
             foreach (Datapoint data in dt.m_points)
             {
-                double x = (m_x + m_pad) + (m_width - 2 * m_pad) * (data.m_x) / dt.m_x_max_value;
-                double y = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * (data.m_y) / dt.m_y_max_value;
+                double x = (m_x + m_pad) + (m_width - 2 * m_pad) * ((data.m_x - dt.m_x_min_value) / dt.m_x_range);
+                double y = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * ((data.m_y - dt.m_y_min_value) / dt.m_y_range);
                 G.FillEllipse(blueBrush, (float)x - point_w/2, (float)y - point_w/2, point_w, point_w);
             }
 
+            //Without Range
+            //foreach (Datapoint data in dt.m_points)
+            //{
+            //    double x = (m_x + m_pad) + (m_width - 2 * m_pad) * (data.m_x) / dt.m_x_max_value;
+            //    double y = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * (data.m_y) / dt.m_y_max_value;
+            //    G.FillEllipse(blueBrush, (float)x - point_w / 2, (float)y - point_w / 2, point_w, point_w);
+            //}
 
             double x_mean = (m_x + m_pad) + (m_width - 2 * m_pad) * (dt.m_x_mean) / dt.m_x_max_value;
             Line mean_x = new Line(new Point((int)x_mean, m_vertical_axis.m_A.Y), new Point((int)x_mean, m_vertical_axis.m_B.Y));
@@ -245,6 +251,7 @@ namespace Lesson4
             blueBrush.Dispose();
             redPen.Dispose();
             fontBrush.Dispose();
+
         }
         public override void update(int dx, int dy)
         {
@@ -289,7 +296,7 @@ namespace Lesson4
             Brush fontBrush = new SolidBrush(Color.Black);
 
             float font_size = 8;
-            Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
+            Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Regular);
 
             G.DrawRectangle(blackPen, m_rectangle);
 
@@ -315,11 +322,11 @@ namespace Lesson4
 
             for (int i = 1; i <= dt.m_x_intervals.m_count; ++i)
             {
-                G.DrawString(dt.m_x_intervals.m_intervals[i - 1].ToString(), font, fontBrush, m_table.X + m_pad / 2, m_table.Y + m_pad / 2 + grid_h * i);
+                G.DrawString(dt.m_x_intervals.m_intervals[i - 1].ToString(), font, fontBrush, m_table.X + m_pad / 5, m_table.Y + m_pad / 2 + grid_h * i);
             }
             for (int i = 1; i <= dt.m_y_intervals.m_count; ++i)
             {
-                G.DrawString(dt.m_y_intervals.m_intervals[i - 1].ToString(), font, fontBrush, m_table.X + m_pad / 2 + grid_w * i , m_table.Y + m_pad / 2);
+                G.DrawString(dt.m_y_intervals.m_intervals[i - 1].ToString(), font, fontBrush, m_table.X + m_pad / 5 + grid_w * i , m_table.Y + m_pad / 2);
             }
             G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2, m_table.Y + m_pad / 2 + grid_h * m_grid_y);
             G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2 + grid_w * m_grid_x, m_table.Y + m_pad / 2);

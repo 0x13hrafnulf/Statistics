@@ -16,7 +16,7 @@ namespace Lesson4
     {
         Graphics G;
         Bitmap bitmap;
-        
+
         List<Viewport> viewports = new List<Viewport>();
         Dataset Data;
 
@@ -61,7 +61,7 @@ namespace Lesson4
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            
+
 
         }
 
@@ -147,24 +147,24 @@ namespace Lesson4
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             foreach (Viewport v in viewports)
-            { 
+            {
                 if (v.m_mouse_drag)
                 {
-                    int d_x = e.X - mouse_down.X;
-                    int d_y = e.Y - mouse_down.Y;
-                    v.update(v.m_mouse_down_pos.X + d_x, v.m_mouse_down_pos.Y + d_y);             
+                    int dx = e.X - mouse_down.X;
+                    int dy = e.Y - mouse_down.Y;
+                    v.update(v.m_mouse_down_pos.X + dx, v.m_mouse_down_pos.Y + dy);
                     draw_scene();
                 }
                 else if (v.m_mouse_resize)
                 {
-                    int d_x = e.X - mouse_down.X;
-                    int d_y = e.Y - mouse_down.Y;
-                    v.resize(size_when_mouse_down.Width + d_x, size_when_mouse_down.Height + d_y);
+                    int dx = e.X - mouse_down.X;
+                    int dy = e.Y - mouse_down.Y;
+                    v.resize(size_when_mouse_down.Width + dx, size_when_mouse_down.Height + dy);
                     draw_scene();
                 }
             }
         }
-        
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             foreach (Viewport v in viewports)
@@ -178,7 +178,36 @@ namespace Lesson4
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
             pictureBox1.Focus();
+            
+   
         }
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            foreach (Viewport v in viewports)
+            {
+                if (v.m_rectangle.Contains(e.Location))
+                {                  
+                    int dx;
+                    int dy;
+                    if (e.Delta > 0)
+                    {
+                        dx = 10;
+                        dy = 10;
+                    }
+                    else
+                    {
+                        dx = -10;
+                        dy = -10;
+                    }
 
+                    v.m_rectangle.Location = new Point(v.m_rectangle.X - dx, v.m_rectangle.Y - dy);
+                    v.m_rectangle.Size = new Size(v.m_rectangle.Width + 2 * dx, v.m_rectangle.Height + 2 * dy);
+
+                    v.update(v.m_rectangle.X - dx, v.m_rectangle.Y - dy);
+                    v.resize(v.m_rectangle.Width + 2 * dx, v.m_rectangle.Height + 2 * dy);
+                    draw_scene();
+                }
+            }
+        }
     }
 }
