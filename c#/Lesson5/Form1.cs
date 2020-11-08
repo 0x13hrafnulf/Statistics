@@ -126,7 +126,7 @@ namespace Lesson5
                     {
                         if (check == i)
                         {
-                            x_a = j;
+                            x_a = j-1;
                             a = true;
                         }
                     }
@@ -149,7 +149,7 @@ namespace Lesson5
                     {
                         if (check == i)
                         {
-                            x_a = j;
+                            x_a = j-1;
                             b = false;
                             a = true;              
                         }
