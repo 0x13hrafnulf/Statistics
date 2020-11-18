@@ -9,14 +9,15 @@ namespace Lesson6
 {
     public class Interval
     {
-        public int m_size;
-        public int m_starting_point;
-        public int m_ending_point;
+        public dynamic m_size;
+        public dynamic m_starting_point;
+        public dynamic m_ending_point;
         public double m_mean;
         public int m_count;
         public float m_density;
 
-        public Interval(int start, int size)
+
+        public Interval(dynamic start, dynamic size)
         {
             m_starting_point = start;
             m_size = size;
@@ -33,17 +34,23 @@ namespace Lesson6
             return string.Format("[{0},{1})", m_starting_point, m_ending_point);
         }
     }
+
+
+
     public class IntervalList
     {
         public int m_count;
         public string m_name;
         public List<Interval> m_intervals;
         public float m_max_density;
+        public int m_index;
 
-        public IntervalList(int count, string name)
+        public double relative_frequency;
+        public IntervalList(int count, string name, int index)
         {
             m_count = count;
             m_name = name;
+            m_index = index; 
             m_intervals = new List<Interval>();
         }
 
@@ -59,6 +66,30 @@ namespace Lesson6
                 start += size;
             }
         }
+        public void populate_via_existing_interval(int n, double start_p, double end_p, double min, double max)
+        {
+            m_count = n;
+            double mid_size = (end_p - start_p);
+
+            Interval mid_interv = new Interval(start_p, mid_size);
+
+            double size = (max - min - mid_size) / (m_count - 1);
+            double start = min;
+            for (int i = 0; i < m_count; ++i)
+            {
+                if ((m_count - 1) / 2 == i)
+                {
+                    m_intervals.Add(mid_interv);
+                    start += mid_size;
+                    continue;
+                }
+                Interval interv = new Interval(start, size);
+                m_intervals.Add(interv);
+                start += size;
+            }
+            
+        }
+
         public void repopulate(int count, double min, double max)
         {
             m_count = count;
@@ -68,19 +99,26 @@ namespace Lesson6
 
         public void check_intervals(double value)
         {
-            int index = ((int)value - m_intervals[0].m_starting_point) / m_intervals[0].m_size;
-            if (index == m_count) index = m_count - 1;
-            m_intervals[index].m_count += 1;
-            m_intervals[index].update_mean(value);
+            //int index = ((int)value - m_intervals[0].m_starting_point) / m_intervals[0].m_size;
+            //if (index == m_count) index = m_count - 1;
+            //m_intervals[index].m_count += 1;
+            //m_intervals[index].update_mean(value);
 
-            //for (int i = 0; i < m_count; ++i)
-            //{
-            //    if (m_intervals[i].m_starting_point <= value && value < m_intervals[i].m_ending_point) 
-            //    {
-            //        m_intervals[i].m_count += 1;
-            //        m_intervals[i].update_mean(value);
-            //    } 
-            //}   
+            for (int i = 0; i < m_count; ++i)
+            {
+                if (m_intervals[i].m_starting_point <= value && value < m_intervals[i].m_ending_point)
+                {
+                    m_intervals[i].m_count += 1;
+                    m_intervals[i].update_mean(value);
+                    break;
+                }
+                else if (i + 1 == m_count)
+                {
+                    m_intervals[i].m_count += 1;
+                    m_intervals[i].update_mean(value);
+                    break;
+                }
+            }
         }
 
         public void find_densities()
@@ -97,6 +135,10 @@ namespace Lesson6
             {
                 m_max_density = m_max_density > m_intervals[i].m_density ? m_max_density : m_intervals[i].m_density;
             }
+        }
+        public void calculate_relative_frequency()
+        {
+            relative_frequency = (double)m_intervals[1].m_count / (double)(m_intervals[1].m_count + m_intervals[0].m_count);
         }
     }
 

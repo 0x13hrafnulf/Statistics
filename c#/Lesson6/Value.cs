@@ -19,7 +19,16 @@ namespace Lesson6
             m_value = value == "" ? null : value;
             m_generic_value = value == "" ? null : value;
         }
-
+        public Value(double value)
+        {
+            m_value = value;
+            m_generic_value = value.ToString();
+        }
+        public Value(int value)
+        {
+            m_value = value;
+            m_generic_value = value.ToString();
+        }
         public void set_type(Type type)
         {
             m_type = type;

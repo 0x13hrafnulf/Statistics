@@ -38,6 +38,16 @@ namespace Lesson6
             Value val = new Value(value);
             m_values.Add(val);       
         }
+        public void Add(double value)
+        {
+            Value val = new Value(value);
+            m_values.Add(val);
+        }
+        public void Add(int value)
+        {
+            Value val = new Value(value);
+            m_values.Add(val);
+        }
         public dynamic get(int i)
         {
             return m_values[i].get_value();
