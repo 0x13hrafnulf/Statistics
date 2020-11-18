@@ -131,8 +131,7 @@ namespace Lesson6
                 {
                     int dx = e.X - mouse_down.X;
                     int dy = e.Y - mouse_down.Y;
-                    //v.update(v.m_mouse_down_pos.X + dx, v.m_mouse_down_pos.Y + dy);
-                    v.update(dx, dy);
+                    v.update(v.m_mouse_down_pos.X + dx, v.m_mouse_down_pos.Y + dy);
                     draw_scene();
                 }
                 else if (v.m_mouse_resize)
