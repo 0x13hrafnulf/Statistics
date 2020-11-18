@@ -165,7 +165,8 @@ namespace Lesson5
         }
         private double function(double x)
         {
-            return Math.Pow(x, 2);
+            return x * 3;
+            //return Math.Pow(x, 2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -176,7 +177,8 @@ namespace Lesson5
         private double integral(double x_a, double x_b)
         {
 
-            return Math.Pow(x_b, 3) / 3.0 - Math.Pow(x_a, 3) / 3.0;
+            return 3 * Math.Pow(x_b, 2) / 2.0 - 3 * Math.Pow(x_a, 2) / 2.0;
+            //return Math.Pow(x_b, 3) / 3.0 - Math.Pow(x_a, 3) / 3.0;
         }
         private int slice_lebesque(int up_bound, int low_bound, double delta, double x)
         {
