@@ -22,44 +22,27 @@ namespace Lesson7
         }
         public override void draw(Graphics G, IntervalList interval)
         {
-            Pen blackPen = new Pen(Color.Black, 1);
             Brush blueBrush = new SolidBrush(Color.BlueViolet);
-            Brush fontBrush = new SolidBrush(Color.Black);
-
-            float font_size = 9;
-            Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
-            G.DrawRectangle(blackPen, m_rectangle);
-
-
-            blackPen.Width = 2f;
-
-            //AXIS
-            G.DrawLine(blackPen, m_vertical_axis.m_A, m_vertical_axis.m_B);
-            G.DrawLine(blackPen, m_horizontal_axis.m_A, m_horizontal_axis.m_B);
-
-
-            //BARS
 
             int n_bars = interval.m_count;
-            int width = Math.Abs(m_vertical_axis.m_A.Y - m_vertical_axis.m_B.Y) / n_bars;
-            int max_height = Math.Abs(m_horizontal_axis.m_A.X - m_horizontal_axis.m_B.X);
+            int max_height = Math.Abs(m_vertical_axis.m_A.Y - m_vertical_axis.m_B.Y);
+            int width = Math.Abs(m_horizontal_axis.m_A.X - m_horizontal_axis.m_B.X) / n_bars;
+
+            double range = interval.m_intervals[n_bars-1].m_ending_point - interval.m_intervals[0].m_starting_point;
 
             for (int i = 0; i < n_bars; ++i)
             {
-                float height = interval.m_intervals[i].m_density * max_height / interval.m_max_density;
+                double height = interval.m_intervals[i].m_density * max_height / interval.m_max_density;// max_height * interval.m_intervals[i].m_relative_frequency;//
 
-                int x = m_vertical_axis.m_A.X;
-                int y = m_vertical_axis.m_A.Y + width * i;
-                G.FillRectangle(blueBrush, new Rectangle(x, y, (int)height, width));
+                double x = m_vertical_axis.m_A.X + width * i;
+                double y = m_vertical_axis.m_A.Y + (max_height - (int)height);
 
-                G.DrawString(interval.m_intervals[i].ToString(), font, fontBrush, x, y + width / 2);
+                G.FillRectangle(blueBrush, new Rectangle((int)x, (int)y, width, (int)(height)));
+               
             }
 
-
-
-            blackPen.Dispose();
             blueBrush.Dispose();
-            fontBrush.Dispose();
+
         }
         public override void update(int dx, int dy)
         {

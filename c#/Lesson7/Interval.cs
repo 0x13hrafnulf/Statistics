@@ -15,7 +15,7 @@ namespace Lesson7
         public double m_mean;
         public int m_count;
         public float m_density;
-
+        public double m_relative_frequency;
 
         public Interval(dynamic start, dynamic size)
         {
@@ -44,14 +44,16 @@ namespace Lesson7
         public List<Interval> m_intervals;
         public float m_max_density;
         public int m_index;
+        public int m_n_points;
 
         public double relative_frequency;
-        public IntervalList(int count, string name, int index)
+        public IntervalList(int count, string name, int index, int points)
         {
             m_count = count;
             m_name = name;
             m_index = index; 
             m_intervals = new List<Interval>();
+            m_n_points = points;
         }
 
         public void populate(double min, double max)
@@ -135,10 +137,15 @@ namespace Lesson7
             {
                 m_max_density = m_max_density > m_intervals[i].m_density ? m_max_density : m_intervals[i].m_density;
             }
+
+            calculate_relative_frequency();
         }
         public void calculate_relative_frequency()
         {
-            relative_frequency = (double)m_intervals[1].m_count / (double)(m_intervals[1].m_count + m_intervals[0].m_count);
+            foreach (Interval i in m_intervals)
+            {
+                i.m_relative_frequency = (double)i.m_count / (double)m_n_points;
+            }
         }
     }
 

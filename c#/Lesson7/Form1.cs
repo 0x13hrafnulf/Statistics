@@ -26,7 +26,7 @@ namespace Lesson7
         int n_N;
         double min;
         double max;
-        int time_interval;
+        int intervals;
 
         Histogram histo;
         RegressionPlot reg_plot;
@@ -57,7 +57,7 @@ namespace Lesson7
             n_N = Convert.ToInt32(numericUpDown2.Text);
             min = Convert.ToDouble(textBox1.Text);
             max = Convert.ToDouble(textBox2.Text);
-
+            intervals = Convert.ToInt32(numericUpDown3.Text);
 
             Data = new Dataset(n_N);
             generate_points();
@@ -71,12 +71,12 @@ namespace Lesson7
             G.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             G.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-            reg_plot = new RegressionPlot(0, 0, 8 * pictureBox1.Width / 9, pictureBox1.Height);
-            histo = new Histogram(8 * pictureBox1.Width / 9, 0, 1 * pictureBox1.Width / 9, pictureBox1.Height);
+            reg_plot = new RegressionPlot(0, 0, pictureBox1.Width, pictureBox1.Height);
+            histo = new Histogram(0, 0, pictureBox1.Width, pictureBox1.Height);
 
 
             viewports.Add(reg_plot);
-            //viewports.Add(histo);
+            viewports.Add(histo);
 
         }
         private void draw_scene()
@@ -84,9 +84,9 @@ namespace Lesson7
             G.Clear(Color.Gray);
 
             //Draw viewports and other objects objects
-
+            histo.draw(G, Data.m_intervals[0]);
             reg_plot.draw(G, Data,min, max);
-            //histo.draw(G, Data.m_intervals[0]);
+
 
             pictureBox1.Image = bitmap;
         }
@@ -175,8 +175,7 @@ namespace Lesson7
         private void generate_points()
         {
             
-
-            Random rnd = new Random();
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             for (int i = 0; i < n_M; ++i) 
             {
                 Variable v = new Variable("");
@@ -188,7 +187,7 @@ namespace Lesson7
                
                 Data.add_variable(n_N, v);
             }
-            Data.process_CDF( min, max);
+            Data.process_CDF( min, max, intervals);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -200,6 +199,7 @@ namespace Lesson7
                 n_N = Convert.ToInt32(numericUpDown2.Text);
                 min = Convert.ToDouble(textBox1.Text);
                 max = Convert.ToDouble(textBox2.Text);
+                intervals = Convert.ToInt32(numericUpDown3.Text);
                 Data.clear();
                 Data.set(n_N);
                 generate_points();
@@ -229,6 +229,7 @@ namespace Lesson7
             n_N = Convert.ToInt32(numericUpDown2.Text);
             min = Convert.ToDouble(textBox1.Text);
             max = Convert.ToDouble(textBox2.Text);
+            intervals = Convert.ToInt32(numericUpDown3.Text);
             Data.clear();
             Data.set(n_N);
             generate_points();

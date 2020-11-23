@@ -155,7 +155,7 @@ namespace Lesson7
         public void process_Bernoulli_intervals(int time_index, int n_intervals, double p, double e)
         {
             m_intervals.Clear();
-            IntervalList list = new IntervalList(n_intervals, time_index.ToString(), time_index);
+            IntervalList list = new IntervalList(n_intervals, time_index.ToString(), time_index, m_number_of_variables);
 
             list.populate_via_existing_interval(n_intervals, p-e, p+e, 0, 1);
 
@@ -169,10 +169,10 @@ namespace Lesson7
             m_intervals.Add(list);
         }
 
-        public void process_CDF(double min, double max)
+        public void process_CDF(double min, double max, int n_intervals)
         {
             DatapointsList list = new DatapointsList(-1, -1);
-            //list.add_point(new Datapoint(min, 0));
+            list.add_point(new Datapoint(min, 0));
 
 
             double[] sort_list = new double[m_number_of_variables];
@@ -191,9 +191,17 @@ namespace Lesson7
                 list.add_point(new Datapoint(sort_list[i], value));
             }
 
+            IntervalList int_list = new IntervalList(n_intervals, "", -1, m_number_of_variables);
+            int_list.populate(min, max);
 
+            for (int i = 0; i < m_number_of_variables; ++i)
+            {
+                int_list.check_intervals(sort_list[i]);
+            }
+            int_list.find_densities();
+            m_intervals.Add(int_list);
 
-            //list.add_point(new Datapoint(max, 1));
+            list.add_point(new Datapoint(max, 1));
             m_points.Add(list);
 
         }
@@ -205,7 +213,7 @@ namespace Lesson7
 
 
             m_summary_data[index].m_intervals = n_intervals;
-            IntervalList list = new IntervalList(n_intervals, m_summary_data[index].m_name, index);
+            IntervalList list = new IntervalList(n_intervals, m_summary_data[index].m_name, index, m_number_of_points);
             list.populate(m_summary_data[index].m_min_value, m_summary_data[index].m_max_value);
 
             for (int i = 0; i < m_number_of_points; ++i)
