@@ -172,14 +172,14 @@ namespace Lesson7
         public void process_CDF(double min, double max, int n_intervals)
         {
             DatapointsList list = new DatapointsList(-1, -1);
-            list.add_point(new Datapoint(min, 0));
+            //list.add_point(new Datapoint(min, 0));
 
 
             double[] sort_list = new double[m_number_of_variables];
 
             for (int i = 0; i < m_number_of_variables; ++i)
             {
-                sort_list[i] = m_summary_data[i].m_mean;
+                sort_list[i] = m_summary_data[i].m_mean * Math.Sqrt(m_number_of_points);
             }
             Array.Sort(sort_list);
 
@@ -187,12 +187,12 @@ namespace Lesson7
             {
                 double value = i+1;
 
-                value /= m_number_of_variables;
+                value = value/m_number_of_variables;
                 list.add_point(new Datapoint(sort_list[i], value));
             }
 
             IntervalList int_list = new IntervalList(n_intervals, "", -1, m_number_of_variables);
-            int_list.populate(min, max);
+            int_list.populate(sort_list[0], sort_list[m_number_of_variables-1]);
 
             for (int i = 0; i < m_number_of_variables; ++i)
             {
@@ -201,7 +201,7 @@ namespace Lesson7
             int_list.find_densities();
             m_intervals.Add(int_list);
 
-            list.add_point(new Datapoint(max, 1));
+            //list.add_point(new Datapoint(max, 1));
             m_points.Add(list);
 
         }

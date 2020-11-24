@@ -32,10 +32,10 @@ namespace Lesson7
 
             for (int i = 0; i < n_bars; ++i)
             {
-                double height = (interval.m_intervals[i].m_density * max_height / interval.m_max_density) * (interval.m_intervals[i].m_relative_frequency);// max_height * interval.m_intervals[i].m_relative_frequency;//
+                double height = (interval.m_intervals[i].m_density * max_height / interval.m_max_density); //(interval.m_intervals[i].m_relative_frequency)
 
                 double x = m_vertical_axis.m_A.X + width * i;
-                double y = m_vertical_axis.m_A.Y + (max_height - (int)height);
+                double y = m_vertical_axis.m_A.Y - m_pad/2 + (max_height - (int)height);
 
                 G.FillRectangle(blueBrush, new Rectangle((int)x, (int)y, width, (int)(height)));
                
