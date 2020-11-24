@@ -32,7 +32,7 @@ namespace Lesson7
 
             for (int i = 0; i < n_bars; ++i)
             {
-                double height = interval.m_intervals[i].m_density * max_height / interval.m_max_density;// max_height * interval.m_intervals[i].m_relative_frequency;//
+                double height = (interval.m_intervals[i].m_density * max_height / interval.m_max_density) * (interval.m_intervals[i].m_relative_frequency);// max_height * interval.m_intervals[i].m_relative_frequency;//
 
                 double x = m_vertical_axis.m_A.X + width * i;
                 double y = m_vertical_axis.m_A.Y + (max_height - (int)height);
