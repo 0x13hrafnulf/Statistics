@@ -24,6 +24,8 @@ namespace Lesson7
         
         int n_M;
         int n_N;
+        int M_old;
+        int N_old;
         double min;
         double max;
         int intervals;
@@ -192,7 +194,7 @@ namespace Lesson7
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            timer1.Start();
             try
             {
                 n_M = Convert.ToInt32(numericUpDown1.Text);
@@ -220,16 +222,30 @@ namespace Lesson7
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            timer1.Stop();
         }
 
         private void numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            n_M = Convert.ToInt32(numericUpDown1.Text);
-            n_N = Convert.ToInt32(numericUpDown2.Text);
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            M_old = n_M;
+            M_old = n_N;
+
+            n_M += 5;
+            n_N += 10;
             min = Convert.ToDouble(textBox1.Text);
             max = Convert.ToDouble(textBox2.Text);
-            intervals = Convert.ToInt32(numericUpDown3.Text);
+
+            intervals = n_M / 2;
+
+            numericUpDown1.Value = n_M;
+            numericUpDown2.Value = n_N;
+            numericUpDown3.Value = intervals;
+
             Data.clear();
             Data.set(n_N);
             generate_points();
