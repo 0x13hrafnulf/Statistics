@@ -37,6 +37,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -44,7 +45,6 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -139,6 +139,17 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(594, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 36);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Stop";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // numericUpDown3
             // 
             this.numericUpDown3.Font = new System.Drawing.Font("Consolas", 8.5F);
@@ -226,19 +237,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1500;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(594, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 36);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
