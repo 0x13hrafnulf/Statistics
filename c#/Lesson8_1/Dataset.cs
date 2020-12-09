@@ -202,41 +202,25 @@ namespace Lesson8_1
         {
             IntervalList list = new IntervalList(n_intervals, "", -1, m_number_of_points);
             list.populate(0, m_number_of_points);
-            int t_start = 0;
 
             for (int i = 0; i < m_number_of_variables; ++i)
             {
-
+                int t = 0;
                 for (int j = 1; j < m_number_of_points; ++j)
                 {
 
-                    if (m_points[i].m_points[j].m_y != m_points[i].m_points[j-1].m_y)
-                    {
-                        t_start = j;
-                        break;
-                    }
-
-                }
-
-                int t = t_start + 1;
-
-                while (t < m_number_of_variables)
-                {
-                    if (m_points[i].m_points[t_start].m_y != m_points[i].m_points[t].m_y)
-                    {
-                        int distanceTime = t - t_start;
+                    if (m_points[i].m_points[j].m_y != m_points[i].m_points[t].m_y)
+                    {                     
+                        int distanceTime = j - t;
                         list.check_intervals(distanceTime);
+                        t = j;
+                    }
 
-                        t_start = t;
-                        t++;
-                    }
-                    else
-                    {
-                        t++;
-                    }
                 }
+       
 
             }
+          
 
             list.find_densities();
             m_intervals.Add(list);
