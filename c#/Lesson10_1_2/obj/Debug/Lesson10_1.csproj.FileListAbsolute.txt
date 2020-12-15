@@ -1,0 +1,10 @@
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\bin\Debug\Lesson10_1.exe.config
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\bin\Debug\Lesson10_1.exe
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\bin\Debug\Lesson10_1.pdb
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.csprojAssemblyReference.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.Form1.resources
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.Properties.Resources.resources
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.csproj.GenerateResource.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.csproj.CoreCompileInputs.cache
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.exe
+D:\Hrafnulf\Sapienza\Statistics\Labs\Statistics\c#\Lesson10_1\obj\Debug\Lesson10_1.pdb
