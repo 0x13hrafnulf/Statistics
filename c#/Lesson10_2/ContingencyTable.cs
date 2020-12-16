@@ -23,7 +23,7 @@ namespace Lesson10_2
             Pen blackPen = new Pen(Color.Black, 1);
             Brush fontBrush = new SolidBrush(Color.Black);
 
-            float font_size = 8;
+            float font_size = 7;
             Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Regular);
 
             G.DrawRectangle(blackPen, m_rectangle);
@@ -56,16 +56,16 @@ namespace Lesson10_2
             {
                 G.DrawString(dt.m_intervals[1].m_intervals[i - 1].ToString(), font, fontBrush, m_table.X + m_pad / 5 + grid_w * i, m_table.Y + m_pad / 2);
             }
-            G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2, m_table.Y + m_pad / 2 + grid_h * m_grid_y);
-            G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 2 + grid_w * m_grid_x, m_table.Y + m_pad / 2);
+            G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 4, m_table.Y + m_pad / 2 + grid_h * m_grid_y);
+            G.DrawString("Total", font, fontBrush, m_table.X + m_pad / 4 + grid_w * m_grid_x, m_table.Y + m_pad / 2);
 
 
             for (int i = 0; i <= dt.m_summary_data[0].m_intervals; ++i)
             {
                 for (int j = 0; j <= dt.m_summary_data[1].m_intervals; ++j)
                 {
-                    if(absolute) G.DrawString(dt.m_distributions[0].m_frequency[i, j].ToString(), font, fontBrush, m_table.X + m_pad / 2 + grid_w * (j + 1), m_table.Y + m_pad / 2 + grid_h * (i + 1));
-                    else G.DrawString(dt.m_distributions[0].m_relative_frequency[i, j].ToString(), font, fontBrush, m_table.X + m_pad / 2 + grid_w * (j + 1), m_table.Y + m_pad / 2 + grid_h * (i + 1));
+                    if(absolute) G.DrawString(dt.m_distributions[0].m_frequency[i, j].ToString(), font, fontBrush, m_table.X + m_pad / 4 + grid_w * (j + 1), m_table.Y + m_pad / 2 + grid_h * (i + 1));
+                    else G.DrawString(dt.m_distributions[0].m_relative_frequency[i, j].ToString(), font, fontBrush, m_table.X + m_pad / 4 + grid_w * (j + 1), m_table.Y + m_pad / 2 + grid_h * (i + 1));
                 }
             }
 

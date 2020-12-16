@@ -33,7 +33,7 @@ namespace Lesson10_2
             Pen mPen = new Pen(Color.DarkGreen, 2);
             Brush fontBrush = new SolidBrush(Color.Black);
 
-            float font_size = 9;
+            float font_size = 7;
             Font font = new Font(FontFamily.GenericMonospace, font_size, FontStyle.Bold);
             if (mode == 0)
             {
