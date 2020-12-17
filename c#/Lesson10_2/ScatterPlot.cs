@@ -30,6 +30,7 @@ namespace Lesson10_2
             Pen blackPen = new Pen(Color.Black, 1);
             Brush blackBrush = new SolidBrush(Color.Black);
             Pen redPen = new Pen(Color.Red, 4);
+            Pen regPen = new Pen(Color.DarkBlue, 4);
             Pen qPen = new Pen(Color.Blue, 2);
 
             float font_size = 9;
@@ -95,10 +96,30 @@ namespace Lesson10_2
             G.DrawLine(qPen, q2.m_A, q2.m_B);
             G.DrawLine(qPen, q3.m_A, q3.m_B);
 
+            double x_a = dt.m_summary_data[0].m_mean - Math.Sqrt(dt.m_summary_data[0].m_variance);
+            double x_b = dt.m_summary_data[0].m_mean + Math.Sqrt(dt.m_summary_data[0].m_variance);
+
+            double r_Ax = (m_x + m_pad) + (m_width - 2 * m_pad) * ((x_a - dt.m_summary_data[0].m_min_value) / dt.m_summary_data[0].m_range);
+            double r_Ay = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * (((dt.m_points[0].m_y_intercept + dt.m_points[0].m_slope * x_a) - dt.m_summary_data[1].m_min_value) / dt.m_summary_data[1].m_range);
+
+            double r_Bx = (m_x + m_pad) + (m_width - 2 * m_pad) * ((x_b - dt.m_summary_data[0].m_min_value) / dt.m_summary_data[0].m_range);
+            double r_By = (m_y + m_pad) + (m_height - 2 * m_pad) - (m_height - 2 * m_pad) * (((dt.m_points[0].m_y_intercept + dt.m_points[0].m_slope * x_b) - dt.m_summary_data[1].m_min_value) / dt.m_summary_data[1].m_range);
+
+
+
+
+            
+
+            Line regression = new Line(new Point((int)r_Ax, (int)r_Ay), new Point((int)r_Bx, (int)r_By));
+
+            G.DrawLine(regPen, regression.m_A, regression.m_B);
+
+
 
 
             blackPen.Dispose();
             redPen.Dispose();
+            regPen.Dispose();
             blackBrush.Dispose();
             qPen.Dispose();
 

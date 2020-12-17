@@ -43,8 +43,20 @@ namespace Lesson10_2
     {
         public int m_x_index;
         public int m_y_index;
+
+
         public List<Datapoint> m_points;
         public Color m_color;
+
+
+        public double S_xx;
+        public double S_xy = 0;
+        public double m_slope;
+        public double m_y_intercept;
+        public double m_x_intercept;
+        public double m_correlation;
+
+
         public DatapointsList(int x_index, int y_index)
         {
             m_x_index = x_index;
@@ -121,17 +133,22 @@ namespace Lesson10_2
             summary.m_min_value = m_variables[index].get(0);
             summary.m_mean = m_variables[index].get(0);
             summary.m_intervals = 1;
+            summary.m_variance = 0;
 
             double[] sort_list = new double[m_number_of_points];
-
+            double old_mean = summary.m_mean;
             for (int i = 1; i < m_number_of_points; ++i)
             {
                 summary.m_mean += Math.Round((double)(m_variables[index].get(i) - summary.m_mean) / (i + 1), 2);
                 summary.m_min_value = m_variables[index].get(i) < summary.m_min_value ? m_variables[index].get(i) : summary.m_min_value;
                 summary.m_max_value = m_variables[index].get(i) > summary.m_max_value ? m_variables[index].get(i) : summary.m_max_value;
                 sort_list[i] = m_variables[index].get(i);
+
+                summary.m_variance += Math.Round((m_variables[index].get(i) - old_mean) * (m_variables[index].get(i) - summary.m_mean), 2);
+                old_mean = summary.m_mean;
             }
 
+            summary.m_variance /= (double)(m_number_of_points - 1);
             Array.Sort(sort_list);
 
             int q2 = (m_number_of_points + 2) / 2 - 1;
@@ -150,10 +167,27 @@ namespace Lesson10_2
         public void add_datapoint(int x_index, int y_index)
         {
             DatapointsList list = new DatapointsList(x_index, y_index);
+            double x_mean = 0;
+            double y_mean = 0;
             for (int i = 0; i < m_number_of_points; ++i)
             {
                 list.add_point(new Datapoint(m_variables[x_index].get(i), m_variables[y_index].get(i)));
+
+                list.S_xy += (x_mean - m_variables[x_index].get(i)) * (y_mean - m_variables[y_index].get(i)) * (double) i / (double)(i + 1);
+
+                x_mean += Math.Round((double)(m_variables[x_index].get(i) - x_mean) / (i + 1), 2);
+                y_mean += Math.Round((double)(m_variables[y_index].get(i) - y_mean) / (i + 1), 2);
+           
             }
+
+            list.S_xx = m_summary_data[x_index].m_variance * (m_number_of_points - 1);
+            list.m_slope = list.S_xy / list.S_xx;
+            list.m_y_intercept = m_summary_data[y_index].m_mean - list.m_slope * m_summary_data[x_index].m_mean;
+            list.m_x_intercept = - list.m_y_intercept / list.m_slope;
+
+            double t = Math.Sqrt(m_summary_data[x_index].m_variance) * Math.Sqrt(m_summary_data[y_index].m_variance);
+            list.m_correlation = list.S_xy / (((double)m_number_of_points - 1) * t);
+
             m_points.Add(list);
         }
         public void add_datapoint(int y_index)
